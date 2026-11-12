@@ -130,3 +130,21 @@ body{background:#fbf8ff;color:var(--ink)}
   .footer-logos {gap: 18px!important;}
   .footer-logos img, .footer-logos img[src="sustainable-tourism-logo.png"] {height:46px!important;max-width:130px!important;}
 }
+
+/* Final footer: self-contained EU emblem and Sustainable logo */
+.footer-logos {
+  display: flex !important; justify-content: center !important; align-items: center !important;
+  flex-wrap: wrap !important; gap: 20px 35px !important; padding: 25px 16px !important;
+  background: #fff !important; border-top: 1px solid #e9e2f6 !important;
+}
+.footer-logos > img { height: 60px !important; width: auto !important; max-width: 165px !important; object-fit: contain !important;
+  background: transparent !important; box-shadow: none !important; }
+.footer-logos::after, .footer-logos::before { content: none !important; display: none !important; }
+.eu-funding-mark { display:flex !important; align-items:center; gap:10px; color:#153475; font-family:Arial,sans-serif;
+  width: 245px; max-width: 100%; font-size:13px; font-weight:700; line-height:1.2; }
+.eu-funding-mark svg { display:block; width:92px; height:auto; flex:0 0 92px; }
+.eu-funding-mark span { display:block; }
+.hint { display:none!important; }
+.footer { background:#37266f!important; border-top: 3px solid #9160e5!important; border-image:none!important; }
+@media(max-width:600px){ .footer-logos{gap:16px 22px!important;} .footer-logos>img{height:48px!important;max-width:130px!important;}
+.eu-funding-mark{width:205px;font-size:11px}.eu-funding-mark svg{width:72px;flex-basis:72px} }
