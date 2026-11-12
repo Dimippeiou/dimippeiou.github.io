@@ -96,3 +96,45 @@ body{background:#fbf8ff;color:var(--ink)}
     background-position: center;
     background-size: contain;
 }
+
+/* Ζώνη λογοτύπων */
+.footer-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 25px 20px;
+    background: #ffffff;
+}
+
+.footer-logos img {
+    width: auto;
+    height: 60px;
+    max-width: 190px;
+    object-fit: contain;
+}
+
+/* Απενεργοποίηση παλαιού πρόσθετου λογοτύπου */
+.footer-logos::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Υποσέλιδο */
+.footer {
+    background: #37266f;
+    border-top: 4px solid #9362e4 !important;
+    border-image: none !important;
+}
+
+@media (max-width: 600px) {
+    .footer-logos {
+        gap: 20px;
+    }
+
+    .footer-logos img {
+        height: 48px;
+        max-width: 135px;
+    }
+}
