@@ -1,0 +1,7 @@
+/* Discreet in-site language switcher (no external translation bars) */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;border:1px solid #d9c6fb;border-radius:99px;padding:3px;background:#fff;white-space:nowrap;flex-shrink:0}
+.lang-switch .lang-toggle{background:transparent;border:0;border-radius:99px;padding:6px 10px;color:#4e328b;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.lang-switch .lang-toggle.selected,.lang-switch .lang-toggle[aria-pressed="true"]{background:#8053d9;color:#fff}
+.lang-switch .lang-toggle:focus-visible{outline:2px solid #2687d4;outline-offset:2px}
+.eu-disclaimer{max-width:1120px;margin:20px auto 0;padding:14px 20px 20px;text-align:center;color:#e9e0fb;font-size:11px;line-height:1.6;font-weight:400;opacity:.82;border-top:1px solid rgba(255,255,255,.18)}
+@media(max-width:850px){.nav-list{flex-wrap:wrap}.lang-switch{margin-inline:auto}}
