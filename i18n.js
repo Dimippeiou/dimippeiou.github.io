@@ -1,56 +1,68 @@
-/* Ippeios bilingual site: static translations, no Google Translate */
-(function () {
+/* Ippeios primary school: Greek-first, user-chosen bilingual content. No external translators. */
+(() => {
   'use strict';
+  const KEY = 'ippeios-language-choice-v2';
+  const LOCALES = ['el', 'en'];
   const dictionary = {};
-  const buttons = () => document.querySelectorAll('[data-lang]');
-  const supported = ['el','en'];
-  function initialLanguage() {
-    try {
-      const saved = localStorage.getItem('language');
-      if (supported.includes(saved)) return saved;
-    } catch (_) {}
-    return (navigator.language || 'el').toLowerCase().startsWith('el') ? 'el' : 'en';
-  }
-  let current = initialLanguage();
-  function translate(lang) {
-    const dict = dictionary[lang];
-    if (!dict) return;
-    current = lang;
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const value = dict[el.dataset.i18n];
-      if (value !== undefined) el.textContent = value;
+  const controls = () => document.querySelectorAll('[data-lang]');
+  let locale = 'el';
+  let ready = false;
+
+  try {
+    const explicit = localStorage.getItem(KEY);
+    if (LOCALES.includes(explicit)) locale = explicit;
+  } catch (error) { /* Greek remains the default */ }
+
+  function render(target) {
+    if (!ready || !LOCALES.includes(target)) return;
+    const words = dictionary[target];
+    document.documentElement.lang = target;
+    document.querySelectorAll('[data-i18n]').forEach(node => {
+      const message = words[node.getAttribute('data-i18n')];
+      if (typeof message === 'string') node.textContent = message;
     });
-    const attributes = ['alt','title','placeholder','aria-label','content'];
-    document.querySelectorAll('*').forEach(el => {
-      attributes.forEach(attr => {
-        const key = el.getAttribute('data-i18n-' + attr);
-        if (key && dict[key] !== undefined) el.setAttribute(attr, dict[key]);
+    for (const name of ['alt','title','placeholder','aria-label','content']) {
+      document.querySelectorAll('[data-i18n-' + name + ']').forEach(node => {
+        const key = node.getAttribute('data-i18n-' + name);
+        if (typeof words[key] === 'string') node.setAttribute(name,words[key]);
       });
+    }
+    const t = document.querySelector('title[data-i18n-attr-text]');
+    if (t && typeof words[t.dataset.i18nAttrText] === 'string') document.title = words[t.dataset.i18nAttrText];
+    controls().forEach(button => {
+      const chosen = button.dataset.lang === target;
+      button.classList.toggle('selected',chosen);
+      button.setAttribute('aria-pressed',String(chosen));
     });
-    const titleKey = document.title && document.querySelector('title[data-i18n-attr-text]')?.getAttribute('data-i18n-attr-text');
-    if (titleKey && dict[titleKey]) document.title = dict[titleKey];
-    buttons().forEach(btn => {
-      btn.setAttribute('aria-pressed', String(btn.dataset.lang === lang));
-      btn.classList.toggle('selected',btn.dataset.lang === lang);
-    });
-    try {localStorage.setItem('language',lang);} catch (_) {}
+    locale=target;
   }
-  async function init() {
-    buttons().forEach(btn => btn.addEventListener('click', () => translate(btn.dataset.lang)));
+
+  async function start() {
+    controls().forEach(button => button.addEventListener('click', () => {
+      if (!ready) return;
+      const target=button.dataset.lang;
+      if (!LOCALES.includes(target)) return;
+      try { localStorage.setItem(KEY,target); } catch (_) {}
+      render(target);
+    }));
     try {
-      const files = await Promise.all(['el','en'].map(lang => fetch(lang + '.json').then(r => {
-        if (!r.ok) throw new Error('Translation unavailable: '+lang);
-        return r.json();
-      })));
-      dictionary.el = files[0]; dictionary.en = files[1];
-      translate(current);
-    } catch (err) {
-      console.error('Translation files could not be loaded. Site stays in Greek.',err);
+      const [el,en] = await Promise.all(LOCALES.map(lang =>
+        fetch('./'+lang+'.json', {cache:'no-cache'}).then(response => {
+          if (!response.ok) throw new Error(lang + ': HTTP ' + response.status);
+          return response.json();
+        })
+      ));
+      dictionary.el=el;
+      dictionary.en=en;
+      ready=true;
+      render(locale);
+    } catch(error) {
+      // Keep the original Greek HTML visible if anything fails.
       document.documentElement.lang='el';
-      buttons().forEach(b => b.disabled = true);
+      controls().forEach(button => { button.disabled=true; button.title='Translation temporarily unavailable'; });
+      console.error('Ippeios translations could not be loaded',error);
     }
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',init,{once:true});
-  else init();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',start,{once:true});
+  else start();
 })();
