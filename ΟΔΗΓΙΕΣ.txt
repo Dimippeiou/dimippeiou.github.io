@@ -1,5 +1,18 @@
-Spring Garden 2.0 — Απαλό ροζ #F9D6E4
+ΓΙΑ ΤΟ GITHUB ΤΟΥ ΔΗΜΟΤΙΚΟΥ ΣΧΟΛΕΙΟΥ ΙΠΠΕΙΟΥ
 
-Αποσυμπιέστε και ανεβάστε τα 10 αρχεία HTML και το spring-garden-2.css στον κεντρικό φάκελο του GitHub.
-Τα υπάρχοντα style.css, i18n.css, i18n.js, el.json, en.json, φωτογραφίες και λογότυπα παραμένουν ως έχουν.
-Μπορείτε να επαναφέρετε την προηγούμενη χρωματολογία αφαιρώντας τη γραμμή <link href="spring-garden-2.css" rel="stylesheet"/> από τις 10 σελίδες.
+Ανεβάζουμε ΜΟΝΟ:
+  school.html
+  ippeios-school-collage.png
+
+Και τα δύο στην ΚΕΝΤΡΙΚΗ λίστα του repository:
+https://github.com/Dimippeiou/dimippeiou.github.io
+
+GitHub > Add file > Upload files > Commit changes.
+Το school.html αντικαθιστά το προηγούμενο ομώνυμο.
+Η εικόνα προστίθεται στο ίδιο επίπεδο με το school.html.
+Δεν αλλάζουμε style.css, spring-garden-2.css, μεταφράσεις, index.html ή εικόνες.
+
+Έλεγχος: https://dimippeiou.github.io/school.html
+Αν δεν αλλάξει αμέσως: Ctrl+F5.
+
+ΣΗΜΕΙΩΣΗ: Η σύνθεση είναι αισθητικά επεξεργασμένη εικόνα, όχι απλό κολάζ ανεπεξέργαστων φωτογραφιών. Τα ενσωματωμένα γράμματα μέσα στην εικόνα παραμένουν στα ελληνικά και όταν ο επισκέπτης επιλέξει English.
