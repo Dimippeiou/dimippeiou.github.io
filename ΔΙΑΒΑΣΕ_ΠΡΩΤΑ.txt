@@ -1,0 +1,6 @@
+ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΙΠΠΕΙΟΥ – ΕΓΚΕΚΡΙΜΕΝΗ ΕΝΟΤΗΤΑ ΣΥΝΕΡΓΑΣΙΑΣ
+
+Ανέβασε ΜΟΝΟ το school.html στον κεντρικό φάκελο του GitHub.
+Το ippeios-school-collage.png υπάρχει ήδη στην ιστοσελίδα και δεν χρειάζεται να το ξανανεβάσεις.
+Δεν τροποποιούνται τα αρχεία style.css, spring-garden-2.css, el.json, en.json, i18n.js ή οι άλλες σελίδες.
+Δοκίμασε μετά: https://dimippeiou.github.io/school.html
